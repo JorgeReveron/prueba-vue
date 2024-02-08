@@ -1,6 +1,6 @@
 <template>
     <p>
-      <input type="text" placeholder="nueva tarea" @keyup.enter="$emit('insertTask',newTask)" v-model="newTask">
+      <input type="text" placeholder="nueva tarea" @keyup.enter="insertTask" v-model="newTask">
     </p>
 </template>
 
@@ -8,13 +8,15 @@
 import {ref} from 'vue';
 
 const newTask = ref('');
+const emit = defineEmits("insertTask");
 
-// function insertTask() {
-//   console.log('nueva tarea en componente: ' + newTask.value);
-//   if (newTask.value.length>2) {
-//     $emit('insertNewTask');
-//   }
-// }
+function insertTask() {
+  console.log('nueva tarea en componente: ' + newTask.value);
+  if (newTask.value.length>2) {
+    emit('insertTask',newTask.value);
+    newTask.value = "";
+  }
+}
 
 </script>
 
